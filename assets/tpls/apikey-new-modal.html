@@ -1,0 +1,8 @@
+<div class="apikeyModal">
+    <h2>New Api Key</h2>
+    <form name="form" ng-submit="createApikey(currentApikey)">
+        <input type="text" ng-model="currentApikey.name" placeholder="Name" required />
+        <input type="text" ng-model="currentApikey.key" placeholder="API key" required />
+        <button ng-disabled="form.$invalid">Create</button>
+    </form>
+</div>

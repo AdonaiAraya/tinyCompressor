@@ -1,9 +1,13 @@
 <div class="content">
+    <h2>Compress Key</h2>
+    <div class="compressKeyContent">
+        <p ng-show="!compressApikey.key">No compress key selected. Select one from the table below or create a new one.</p>
+    </div>
     <h2>API Keys</h2>
     <div class="toolbar">
         <div class="left"></div>
         <div class="right">
-            <span class="add" ng-click="formApikey()"><i class="fa fa-plus"></i></span>
+            <span class="add" ng-click="formApikey()" title="Add new api key"><i class="fa fa-plus"></i></span>
         </div>
     </div>
     <table>
@@ -12,13 +16,15 @@
             <th>Key</th>
             <th></th>
         </tr>
-        <tr ng-repeat="apikey in apikeys">
+        <tr ng-repeat="apikey in _apikeys = apikeys">
             <td>{{apikey.name}}</td>
-            <td>{{apikey.key}}</td>
+            <td><i class="fa fa-key" title="{{apikey.key}}"></i></td>
             <td class="actions">
-                <span ng-click="formApikey(apikey)"><i class="fa fa-edit"></i></span>
-                <span class="danger" ng-click="deleteApikey(apikey)"><i class="fa fa-trash"></i></span>
+                <span ng-show="apikey.key != compressApikey.key" ng-click="selectCompressApikey(apikey)" title="Select this key as Compress Key"><i class="fa fa-tag"></i></span>
+                <span ng-click="formApikey(apikey, true)" title="Edit api key"><i class="fa fa-edit"></i></span>
+                <span class="danger" ng-click="deleteApikey(apikey)" title="Delete api key"><i class="fa fa-trash"></i></span>
             </td>
         </tr>
     </table>
+    <p class="noitems" ng-show="_apikeys.length == 0">No API keys found</p>
 </div>

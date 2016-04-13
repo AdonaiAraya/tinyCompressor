@@ -10,23 +10,29 @@ angular.module("tinyCompressorApp.controllers", [])
 
 .controller("configurationCtrl", function($scope, apikeyService, modalService){
     $scope.apikeys = apikeyService.getApikeys();
-    $scope.currentApiKey = {};
+    $scope.compressApikey = apikeyService.getCompressApikey();
+    $scope.currentApikey = {};
+    $scope.formerApikey = {};
 
-    $scope.formApikey = function (apiKey) {
-        $scope.currentApiKey = apiKey || {};
+    $scope.formApikey = function (apiKey, isEdit) {
+        $scope.currentApikey = angular.copy(apiKey) || {};
+        if(isEdit) $scope.formerApikey = apiKey;
 
         modalService.createModal({
             scope: $scope,
-            templateUrl: "assets/tpls/apikey-modal.html"
+            templateUrl: "assets/tpls/apikey-" + (isEdit ? "edit" : "new") + "-modal.html"
         });
     };
-    
-    $scope.editOrCreateApikey = function (apikey) {
-        console.log(form);
-        console.log(apikey);
 
+    $scope.selectCompressApikey = function (apikey) {
+        $scope.compressApikey = apikey;
+    };
+
+    $scope.editApikey = function (apikey) {
         if(apikey && apikey.name && apikey.key){
-            $scope.apikeys.push(apikey);
+            $scope.formerApikey.name = apikey.name;
+            $scope.formerApikey.key = apikey.key;
+
             apikeyService.save();
             modalService.closeModal();
         }
@@ -35,8 +41,21 @@ angular.module("tinyCompressorApp.controllers", [])
         }
     };
 
-    $scope.deleteApikey = function (apiKey) {
+    $scope.createApikey = function (apikey) {
+        if(apikey && apikey.name && apikey.key && !apikeyService.getApikeyIfExist(apikey)){
+            $scope.apikeys.push(apikey);
+            apikeyService.save();
+            modalService.closeModal();
+        }
+        else {
+            //TODO: Error, debes rellenar todos los campos y la clave no debe coincidir
+        }
+    };
+
+    $scope.deleteApikey = function (apikey) {
         //TODO: Delete apikey
+        $scope.apikeys.splice( $scope.apikeys.indexOf(apikey), 1 );
+        apikeyService.save();
     }
 })
 

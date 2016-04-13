@@ -16,17 +16,28 @@ angular.module("tinyCompressorApp.services", [])
 })
     
 .service("apikeyService", function () {
-    var apikeys = [];
+    var API_KEYS = [];
+    var COMPRESS_API_KEY = {};
 
     this.load = function () {
-        if(localStorage.getItem("apikeys")) apikeys = angular.fromJson(localStorage.getItem("apikeys"));
+        if(localStorage.getItem("apikeys")) API_KEYS = angular.fromJson(localStorage.getItem("apikeys"));
+        if(localStorage.getItem("compresskey")) COMPRESS_API_KEY = angular.fromJson(localStorage.getItem("compresskey"));
     };
 
     this.save = function () {
-        localStorage.setItem("apikeys", angular.toJson(apikeys));
+        localStorage.setItem("apikeys", angular.toJson(API_KEYS));
+        localStorage.setItem("compresskey", angular.toJson(COMPRESS_API_KEY));
     };
 
     this.getApikeys = function () {
-        return apikeys;
+        return API_KEYS;
+    };
+
+    this.getCompressApikey = function () {
+        return COMPRESS_API_KEY;
+    };
+
+    this.getApikeyIfExist = function (apikey){
+        return _.findWhere( API_KEYS, { key: apikey.key} );
     };
 })

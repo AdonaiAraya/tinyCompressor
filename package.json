@@ -1,6 +1,9 @@
 {
-	"name": "Tiny Compressor",
+	"name": "TinyCompressor",
 	"main": "index.html",
+    "dependencies": {
+        "tinify": "1.3.0"
+    },
 	"window": {
 		"resizable": false,
 		"width": 700,

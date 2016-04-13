@@ -1,8 +1,0 @@
-<div class="apikeyModal">
-    <h2>{{ ::(currentApiKey.name ? "Edit" : "Create") }} Api Key</h2>
-    <form name="form" ng-submit="editOrCreateApikey(currentApiKey)">
-        <input type="text" ng-model="currentApiKey.name" placeholder="Name" required />
-        <input type="text" ng-model="currentApiKey.key" placeholder="API key" required />
-        <button ng-disabled="form.$invalid">{{ ::(currentApiKey.name ? "Edit" : "Create") }} Api Key</button>
-    </form>
-</div>
