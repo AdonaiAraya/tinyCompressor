@@ -1,0 +1,13 @@
+{
+	"name": "Tiny Compressor",
+	"main": "index.html",
+	"window": {
+		"resizable": false,
+		"width": 700,
+		"height": 700,
+		"toolbar": false,
+		"frame": false,
+		"position": "center",
+		"icon": "icon.png"
+	}
+}

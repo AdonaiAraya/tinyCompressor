@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="tinyCompressorApp">
+    <head>
+        <title>Tiny Compressor</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/app.min.css" />
+        <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css" />
+        <script src="vendor/angular/angular.min.js"></script>
+        <script src="vendor/angular/angular-router.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/controllers.js"></script>
+        <script src="assets/js/services.js"></script>
+        <script src="assets/js/directives.js"></script>
+    </head>
+    <body ng-controller="mainCtrl">
+        <top-frame></top-frame>
+        <menu></menu>
+        <main id="main" ng-view></main>
+    </body>
+</html>
